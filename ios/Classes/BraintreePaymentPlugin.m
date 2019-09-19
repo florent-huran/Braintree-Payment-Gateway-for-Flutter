@@ -38,7 +38,7 @@ FlutterResult _flutterResult;
         _flutterResult = result;
         clientToken = call.arguments[@"clientToken"];
         amount =call.arguments[@"amount"];
-        clientEmail = call.arguments[@"email];
+        clientEmail = call.arguments[@"email"];
         [self showDropIn:clientToken withResult:result];
     } else {
         result(FlutterMethodNotImplemented);
