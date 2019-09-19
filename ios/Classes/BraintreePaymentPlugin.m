@@ -6,6 +6,7 @@
 
 NSString *clientToken;
 NSString *amount;
+NSString *clientEmail;
 FlutterResult _flutterResult;
 
 @interface BraintreePaymentPlugin ()
