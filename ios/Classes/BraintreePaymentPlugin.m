@@ -38,14 +38,22 @@ FlutterResult _flutterResult;
         _flutterResult = result;
         clientToken = call.arguments[@"clientToken"];
         amount =call.arguments[@"amount"];
+        clientEmail = call.arguments[@"email];
         [self showDropIn:clientToken withResult:result];
     } else {
         result(FlutterMethodNotImplemented);
     }
 }
 
-- (void)showDropIn:(NSString *)clientTokenOrTokenizationKey withResult:(FlutterResult)flutterResult {
+- (void)showDropIn:(NSString *)clientTokenOrTokenizationKey withResult:(FlutterResult)flutterResult (NSString *)clientEmail  {
+    BTThreeDSecureRequest *threeDSecureRequest = [[BTThreeDSecureRequest alloc] init];
+    threeDSecureRequest.amount = [NSDecimalNumber decimalNumberWithString:amount];
+    threeDSecureRequest.email = clientEmail;
+    threeDSecureRequest.versionRequested = BTThreeDSecureVersion2;
+    
     BTDropInRequest *request = [[BTDropInRequest alloc] init];
+    request.threeDSecureVerification = YES;
+    request.threeDSecureRequest = threeDSecureRequest;
     
    BTDropInController *dropInController = [[BTDropInController alloc] initWithAuthorization:clientTokenOrTokenizationKey request:request handler:^(BTDropInController * _Nonnull controller, BTDropInResult * _Nullable result, NSError * _Nullable error) {
         
