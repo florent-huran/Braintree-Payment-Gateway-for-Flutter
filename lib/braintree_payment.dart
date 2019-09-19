@@ -11,7 +11,8 @@ class BraintreePayment {
       String amount = "",
       bool enableGooglePay = true,
       bool inSandbox = true,
-      String googleMerchantId = ""}) async {
+      String googleMerchantId = "",
+      String clientEmail = ""}) async {
     if (Platform.isAndroid) {
       var result;
       if (inSandbox == false && googleMerchantId.isEmpty) {
@@ -41,7 +42,7 @@ class BraintreePayment {
       return result;
     } else {
       String result = await _channel
-          .invokeMethod('showDropIn', {'clientToken': nonce, 'amount': amount});
+          .invokeMethod('showDropIn', {'clientToken': nonce, 'amount': amount, 'clientEmail': clientEmail});
       return result;
     }
   }
